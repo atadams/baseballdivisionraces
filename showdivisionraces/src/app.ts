@@ -16,11 +16,11 @@ class TeamColors {
         this._dark = dark ?? light;
     }
     // Color used in light mode
-    get light() { 
+    get light() {
         return this._light;
     }
     // Color used in dark mode
-    get dark() { 
+    get dark() {
         return this._dark;
     }
 }
@@ -83,7 +83,7 @@ function get_plot_datas(all_standings: Array<Array<number[]>>, team_names: strin
     for (let i = 0; i < team_names.length; ++i) {
         const team_standings = all_standings.map(x => x[i]);
         const games_above_500 = team_standings.map(x => x[0] - x[1]);
-        const hover_texts = team_standings.map((x, i) => `${x[0]}-${x[1]}\n${get_games_back_string(x, division_leader_games_above_500[i])}`);
+        const hover_texts = team_standings.map((x, i) => `${x[0]}-${x[1]}\n${get_games_back_string(x, division_leader_games_above_500[i])} [${games_above_500[i] > 0 ? '+' : ''}${games_above_500[i]}]`);
         const team_colors = useTeamColors ? TEAM_NAMES_TO_COLORS.get(team_names[i]) : null;
         plot_datas.push({
             x: date_values,
@@ -147,9 +147,13 @@ function addChart(title: string, team_names: string[], all_standings: Array<Arra
     let textColor = isDark ? LIGHT_TEXT_COLOR : DARK_TEXT_COLOR;
     Plotly.newPlot( chartSection.children.item(index), plot_datas,
         {
+        margin: {
+            t: 40,
+        },
         title: {
             text: title,
             font: {
+                size: 22,
                 color: textColor
             }
         },
@@ -162,6 +166,7 @@ function addChart(title: string, team_names: string[], all_standings: Array<Arra
             color: textColor
         },
         yaxis: {
+            title: 'Games ± .500',
             color: textColor
         },
         hovermode: "x",
@@ -276,7 +281,7 @@ if (window.CSS && CSS.supports("color", "var(--primary)")) {
       if (e.currentTarget.classList.contains("light--hidden")) {
         // Sets the custom html attribute
         document.documentElement.setAttribute("color-mode", "light"); // Sets the user's preference in local storage
-  
+
         localStorage.setItem("color-mode", "light");
         updateYearBasedOnSelector();
         return;
@@ -284,13 +289,13 @@ if (window.CSS && CSS.supports("color", "var(--primary)")) {
       /* Switch to Dark Mode
       Sets the custom html attribute */
       document.documentElement.setAttribute("color-mode", "dark"); // Sets the user's preference in local storage
-  
+
       localStorage.setItem("color-mode", "dark");
       updateYearBasedOnSelector();
     }; // Get the buttons in the DOM
-  
+
     let toggleColorButtons = document.querySelectorAll(".color-mode__btn"); // Set up event listeners
-  
+
     toggleColorButtons.forEach(function(btn) {
       btn.addEventListener("click", toggleColorMode);
     });
