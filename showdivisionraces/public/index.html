@@ -20,11 +20,12 @@
     <title>MLB Division Race Charts</title>
     <style>
         div.container {
-          max-width: 800px;
+          max-width: 90vw;
         }
         div.chart {
           width: 100%;
-          height: 20%; /* TODO */
+          height: 50vw; /* TODO */
+          margin-top: 36px;
         }
         /* TODO extract this? */
         /* https://www.geeksforgeeks.org/how-to-create-toggle-switch-by-using-html-and-css/ */
@@ -39,7 +40,7 @@
         border-radius: 10px;
         border: 2px solid gray;
     }
-            
+
     /* After slide changes */
     .toggle:after {
         content: '';
@@ -52,26 +53,26 @@
         /*left: 1px; */
         transition:  all 0.5s;
     }
-                
+
     /* Checkbox cheked effect */
     .checkbox:checked + .toggle::after {
-        left : 19px; 
+        left : 19px;
     }
-            
+
     /* Checkbox cheked toggle label bg color */
     .checkbox:checked + .toggle {
         background-color: #262626;
         background-color: var(--surface1, #262626);
     }
-            
+
     /* Checkbox vanished */
-    .checkbox { 
+    .checkbox {
         display : none;
     }
 
 
         /* TODO extract this */
-        
+
         :root[color-mode="light"] {
   --surface1: #e6e6e6;
   --surface2: #f2f2f2;
@@ -239,7 +240,7 @@ a:visited {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
   }
-} 
+}
     </style>
     <ssihead />
   </head>
